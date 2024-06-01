@@ -1,0 +1,9 @@
+.Customer-Form__Control {
+  gap: 8px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  .ant-form-item {
+    flex: 1;
+  }
+}
