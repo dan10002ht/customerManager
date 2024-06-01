@@ -37,7 +37,7 @@ export const updateCustomer = async ({id, data}) => {
       ? {...cData, id, data, searchName: convertVietnameseToEnglish(data.ten_khach_hang)}
       : cData,
   );
-  return await createOrUpdateCache({type: 'customer', dataJson: toUpdateCacheData});
+  return await createOrUpdateCache({type: 'customer', dataJson: JSON.stringify(toUpdateCacheData)});
 };
 
 export const getCustomerById = async (id) => {

@@ -12,6 +12,7 @@ const CustomerTable = () => {
       apiUrl: "/customer/list",
       defaultFetchFilter: {},
     });
+  console.log({ pagination });
   const [pageNum, setPageNum] = useState(1);
   const [searchText, setSearchText] = useState("");
   const searchTextDebounce = useDebounce(searchText, 500);
@@ -57,6 +58,10 @@ const CustomerTable = () => {
       {
         title: "Giới tính",
         dataIndex: "gender",
+        render: (val) => {
+          if (val === "male") return "Nam";
+          return "Nữ";
+        },
       },
       {
         title: "Số điện thoại",

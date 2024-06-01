@@ -1,17 +1,20 @@
 import React from "react";
 import "./CommonInformationTemplate.scss";
 
-const CommonInformationTemplate = ({ children }) => {
+const CommonInformationTemplate = ({ children, data }) => {
+  console.log({ data });
   return (
     <page>
       <div className="Template">
         <div className="Template-Container">
           <div className="Template-Top">
-            <div className="Template-TopLeft">NAM</div>
+            <div className="Template-TopLeft">
+              {data.gender === "male" ? "NAM" : "NỮ"}
+            </div>
             <div className="Template-TopRight">
               <table>
                 <tr>
-                  <td style={{ width: "50%" }}>Ngày đến</td>
+                  <td style={{ width: "50%" }}>Ngày đến:</td>
                   <td>ID: </td>
                 </tr>
                 <tr>
@@ -27,12 +30,12 @@ const CommonInformationTemplate = ({ children }) => {
           </div>
           {children}
           <div className="Template-Note">
-            <div style={{ fontWeight: 600, margin: "16px 0 4px" }}>Ghi chu</div>
+            <div style={{ fontWeight: 600, margin: "16px 0 4px" }}>Ghi chú</div>
             <table>
               <tr>
-                <th>Mau vai</th>
+                <th>Mẫu vải</th>
                 <th>STT</th>
-                <th>Ghi chu</th>
+                <th>Ghi chú</th>
               </tr>
               {Array(5)
                 .fill(null)

@@ -35,6 +35,7 @@ export const edit = async (req, res) => {
     await updateCustomer({id, data});
     return res.status(200).json({success: true});
   } catch (e) {
+    console.log(e.message);
     return res.status(500).json({success: false, error: e.message});
   }
 };
@@ -43,8 +44,8 @@ export const getList = async (req, res) => {
   try {
     const {searchText} = req.query;
     const getFunctions = !searchText || !searchText.trim() ? getCustomers : getSearchCustomers;
-    const {data} = await getFunctions(req.query);
-    return res.status(200).json({success: true, data});
+    const {data, ...rest} = await getFunctions(req.query);
+    return res.status(200).json({success: true, data, pagination: rest});
   } catch (e) {
     console.log(e);
     return res.status(500).json({success: false, error: e.message});

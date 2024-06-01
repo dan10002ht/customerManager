@@ -16,7 +16,6 @@ page {
 }
 .Template {
   width: 100%;
-  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -74,7 +73,7 @@ page {
       }
       .Template-Note__Bottom {
         td {
-          height: 30px;
+          height: 50px;
         }
       }
     }

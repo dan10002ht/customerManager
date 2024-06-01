@@ -23,7 +23,7 @@ const maleOptions = [
   ],
   [
     { label: "Eo", value: "10", name: "eo" },
-    { label: "Mông", value: "x", name: "mong " },
+    { label: "Mông", value: "x", name: "mong" },
     { label: "Lưng", value: "x", name: "lung" },
   ],
   [
