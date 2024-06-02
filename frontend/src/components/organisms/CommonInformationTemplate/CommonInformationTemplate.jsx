@@ -2,9 +2,8 @@ import React from "react";
 import "./CommonInformationTemplate.scss";
 
 const CommonInformationTemplate = ({ children, data }) => {
-  console.log({ data });
   return (
-    <page>
+    <div className="page" data-size="A4">
       <div className="Template">
         <div className="Template-Container">
           <div className="Template-Top">
@@ -37,7 +36,7 @@ const CommonInformationTemplate = ({ children, data }) => {
                 <th>STT</th>
                 <th>Ghi chú</th>
               </tr>
-              {Array(5)
+              {Array(6)
                 .fill(null)
                 .map((x, index) => (
                   <tr className="Template-Note__Bottom" key={index}>
@@ -50,7 +49,7 @@ const CommonInformationTemplate = ({ children, data }) => {
           </div>
         </div>
       </div>
-    </page>
+    </div>
   );
 };
 

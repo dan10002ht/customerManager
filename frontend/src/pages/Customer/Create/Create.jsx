@@ -36,6 +36,7 @@ const Create = () => {
         onGenderChange,
         gender,
         loading: creating,
+        formType: "add",
       }}
     >
       <CustomerForm />

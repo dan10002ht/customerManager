@@ -14,6 +14,23 @@ export async function paginateQuery(queriedRef, collection, query = {}, selectFi
   let hasPre = false;
   let hasNext = false;
   const total = await countQueriedRef(queriedRef);
+  if (query.sort) {
+    queriedRef = queriedRef.orderBy('createdAt', query.sort);
+  }
+  if (query.gender && query.gender !== 'all') {
+    queriedRef = queriedRef.where('gender', '==', query.gender);
+  }
+  if (query.end) {
+    queriedRef = queriedRef.where(
+      'createdAt',
+      '<=',
+      new Date(new Date(query.end).setDate(new Date(query.end).getDate() + 1)),
+    );
+  }
+  if (query.start) {
+    queriedRef = queriedRef.where('createdAt', '>=', new Date(query.start));
+  }
+
   if (query.after) {
     const after = await collection.doc(query.after).get();
     queriedRef = queriedRef.startAfter(after);

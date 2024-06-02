@@ -38,6 +38,7 @@ const Edit = () => {
         gender: data.gender,
         loading: loading || editing,
         defaultData: data,
+        formType: "edit",
       }}
     >
       {fetched && <CustomerForm />}

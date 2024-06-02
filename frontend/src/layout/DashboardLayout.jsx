@@ -5,6 +5,11 @@ const { Content, Footer, Sider } = Layout;
 
 const navigationItems = [
   {
+    key: "/",
+    label: "Trang chủ",
+    path: "/",
+  },
+  {
     key: "/customer/create",
     label: "Thêm khách hàng",
     path: "/customer/create",
@@ -16,7 +21,7 @@ const navigationItems = [
   },
 ];
 
-const DashboardLayout = ({ children }) => {
+const DashboardLayout = ({ children, removePadding = false }) => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -25,7 +30,7 @@ const DashboardLayout = ({ children }) => {
     <Layout hasSider>
       <Sider
         style={{
-          overflow: "auto",
+          overflow: removePadding ? "hidden" : "auto",
           height: "100vh",
           position: "fixed",
           left: 0,
@@ -37,27 +42,33 @@ const DashboardLayout = ({ children }) => {
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={["/customer/create"]}
+          defaultSelectedKeys={["/"]}
+          selectedKeys={[
+            ["/customer/create", "/customer/list"].includes(
+              window.location.pathname
+            )
+              ? window.location.pathname
+              : "/",
+          ]}
           items={navigationItems}
-          onSelect={(info) => {
-            navigate(info.key);
-          }}
+          onSelect={(info) => navigate(info.key)}
         />
       </Sider>
       <Layout
         style={{
           marginLeft: 200,
+          height: "unset",
         }}
       >
         <Content
           style={{
-            margin: "24px 16px 0",
-            overflowY: "auto",
+            margin: removePadding ? "0" : "24px 16px 0",
+            overflowY: removePadding ? "hidden" : "auto",
           }}
         >
           <div
             style={{
-              padding: 24,
+              padding: removePadding ? 0 : 24,
               background: colorBgContainer,
               borderRadius: borderRadiusLG,
             }}

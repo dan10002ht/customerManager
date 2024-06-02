@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useFetchApi from "../../hooks/useFetchApi";
 import CommonInformationTemplate from "../../components/organisms/CommonInformationTemplate/CommonInformationTemplate";
@@ -8,6 +8,12 @@ import FemaleCommon from "../../components/molecules/FemaleCommon";
 const Information = () => {
   const { id } = useParams();
   const { data, fetched } = useFetchApi({ url: `/customer/${id}` });
+
+  useEffect(() => {
+    if (fetched) {
+      window.print();
+    }
+  }, [fetched]);
   const commonMarkup =
     data.gender === "male" ? (
       <MaleCommon data={data} />

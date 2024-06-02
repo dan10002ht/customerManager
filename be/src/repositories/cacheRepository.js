@@ -1,15 +1,32 @@
 import db from '../const/db';
+import convertVietnameseToEnglish from '../helpers/convertVietnameseToEnglish';
 
 const collection = db.collection('cache');
 
-export const getCacheByType = async (type, search = '') => {
+const fields = {
+  ten_khach_hang: 'searchName',
+  so_dien_thoai: 'so_dien_thoai',
+  email: 'email',
+};
+
+export const getCacheByType = async (
+  type,
+  search = '',
+  searchField = 'ten_khach_hang',
+  gender = 'all',
+) => {
+  const key = fields[searchField];
   const cacheDocs = await collection.where('type', '==', type).limit(1).get();
   if (cacheDocs.size > 0) {
     const [doc] = cacheDocs.docs;
     const {dataJson} = doc.data();
-    const cacheData = JSON.parse(dataJson).filter(
-      (data) => data?.searchName?.toLowerCase()?.includes(search?.toLowerCase()) || search === '',
-    );
+    const cacheData = JSON.parse(dataJson).filter((data) => {
+      const searchFilter =
+        data?.[key]?.toLowerCase()?.includes(convertVietnameseToEnglish(search?.toLowerCase())) ||
+        search === '';
+      if (gender === 'all') return searchFilter;
+      return searchFilter && data.gender === gender;
+    });
     return [cacheData, cacheDocs];
   }
   return [[], null];

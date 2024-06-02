@@ -12,18 +12,20 @@ import DashboardLayout from "../layout/DashboardLayout";
 import Information from "../pages/Information";
 
 const Routing = ({ prefix = "" }) => {
-  const routeGroups = [
-    ...defaultRoute,
-    {
-      path: "*",
-      component: Page404,
-    },
-  ];
-  // empty bracket for layout
+  const routeGroups = defaultRoute;
   return (
     <Router>
       <Routes>
         <Route path="/information/:id" Component={Information}></Route>
+        <Route
+          element={
+            <DashboardLayout removePadding={true}>
+              <Outlet />
+            </DashboardLayout>
+          }
+        >
+          <Route path={"*"} element={<Page404 />}></Route>
+        </Route>
         <Route
           element={
             <DashboardLayout>

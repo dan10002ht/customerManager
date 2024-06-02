@@ -8,33 +8,40 @@ import {createOrUpdateCache, getCacheByType} from './cacheRepository';
 const collection = db.collection('customer');
 
 export const addCustomer = async ({data}) => {
-  const doc = await collection.add(data);
+  const toCreatedData = {...data, createdAt: new Date()};
+  const doc = await collection.add(toCreatedData);
   const [cacheData] = await getCacheByType('customer');
   await createOrUpdateCache({
     type: 'customer',
     dataJson: JSON.stringify([
       ...cacheData,
-      {...data, id: doc.id, searchName: convertVietnameseToEnglish(data.ten_khach_hang)},
+      {...toCreatedData, id: doc.id, searchName: convertVietnameseToEnglish(data.ten_khach_hang)},
     ]),
   });
   return doc.id;
 };
 
 export const updateCustomer = async ({id, data}) => {
-  await collection.doc(id).update(data);
+  const toUpdateData = {...data, createdAt: new Date(data.createdAt), updatedAt: new Date()};
+  await collection.doc(id).update(toUpdateData);
   const [cacheData] = await getCacheByType('customer');
   if (!cacheData.find((x) => x.id === id)) {
     return await createOrUpdateCache({
       type: 'customer',
       dataJson: JSON.stringify([
         ...cacheData,
-        {id, searchName: convertVietnameseToEnglish(data.ten_khach_hang)},
+        {...toUpdateData, id, searchName: convertVietnameseToEnglish(data.ten_khach_hang)},
       ]),
     });
   }
   const toUpdateCacheData = cacheData.map((cData) =>
     cData.id === data.id
-      ? {...cData, id, data, searchName: convertVietnameseToEnglish(data.ten_khach_hang)}
+      ? {
+          ...cData,
+          ...toUpdateData,
+          id,
+          searchName: convertVietnameseToEnglish(data.ten_khach_hang),
+        }
       : cData,
   );
   return await createOrUpdateCache({type: 'customer', dataJson: JSON.stringify(toUpdateCacheData)});
@@ -55,10 +62,17 @@ export const getCustomers = async (query) => {
 };
 export const getSearchCustomers = async (query) => {
   try {
-    const {searchText, page} = query;
+    const {searchText, page, searchField} = query;
     const limit = parseInt(query.limitPerPage || 10);
     const pageNum = parseInt(page || 1);
-    const [suggestions] = await getCacheByType('customer', searchText);
+    const [suggestions] = await getCacheByType('customer', searchText, searchField, query.gender);
+    if (query.sort) {
+      suggestions.sort((a, b) =>
+        query.sort === 'desc'
+          ? new Date(b.createdAt) - new Date(a.createdAt)
+          : new Date(a.createdAt) - new Date(b.createdAt),
+      );
+    }
     const ids = suggestions.slice(limit * (pageNum - 1), limit * pageNum).map((x) => x.id);
     const data = await getByIds({collection, ids, selectDoc: true});
     const hasPre = pageNum > 1;

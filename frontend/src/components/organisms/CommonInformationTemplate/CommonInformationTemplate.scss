@@ -1,15 +1,13 @@
-page {
+.page[data-size="A4"] {
   background: white;
   width: 21cm;
-  height: 29.7cm;
+  height: 26cm;
   display: block;
   margin: 0 auto;
-  margin-bottom: 0.5cm;
-  box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);
 }
 @media print {
   body,
-  page {
+  .page[data-size="A4"] {
     margin: 0;
     box-shadow: 0;
   }
@@ -73,7 +71,7 @@ page {
       }
       .Template-Note__Bottom {
         td {
-          height: 50px;
+          height: 90px;
         }
       }
     }

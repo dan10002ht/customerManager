@@ -78,8 +78,10 @@ export default function CustomerForm() {
     onGenderChange,
     gender,
     loading,
+    formType,
     defaultData = {},
   } = useContext(CustomerFormContext);
+
   const genderOptions = gender === "female" ? femaleOptions : maleOptions;
 
   return (
@@ -90,6 +92,9 @@ export default function CustomerForm() {
       layout="vertical"
       size="middle"
     >
+      <Typography.Title level={3}>
+        {formType === "add" ? "Thêm khách hàng" : "Sửa khách hàng"}
+      </Typography.Title>
       <Form.Item label="Giới tính" name="gender">
         <Radio.Group value={gender}>
           <Radio.Button value="male">Nam</Radio.Button>
@@ -126,7 +131,7 @@ export default function CustomerForm() {
         htmlType="submit"
         type="primary"
       >
-        Thêm khách hàng
+        {formType === "add" ? "Thêm khách hàng" : "Sửa khách hàng"}
       </Button>
     </Form>
   );

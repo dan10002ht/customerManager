@@ -36,7 +36,6 @@ export default function useFetchWithPagination({
     customFilters = {},
     keepPreviousData = false
   ) => {
-    console.log({ customFilters });
     const { page, before } = customFilters;
     if (customFilters.searchText) setTotal(0);
 
