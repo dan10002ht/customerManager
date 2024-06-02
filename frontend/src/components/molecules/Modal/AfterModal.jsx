@@ -2,14 +2,16 @@ import React from "react";
 import { Button, Modal, Typography } from "antd";
 import checkIcon from "../../../assets/check-icon.png";
 
-const AfterModal = ({ open, handleCancel }) => {
+const AfterModal = ({ open, handleCancel, setOpen }) => {
   return (
     <Modal
+      closable
       title="Thông báo"
       open={open}
       handleOk={handleCancel}
       handleCancel={handleCancel}
       footer={null}
+      onCancel={() => setOpen(false)}
     >
       <div
         style={{

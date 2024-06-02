@@ -79,6 +79,7 @@ export default function CustomerForm() {
     gender,
     loading,
     formType,
+    form,
     defaultData = {},
   } = useContext(CustomerFormContext);
 
@@ -86,6 +87,7 @@ export default function CustomerForm() {
 
   return (
     <Form
+      form={form}
       onFinish={handleSave}
       initialValues={{ gender: "male", ...defaultData }}
       onValuesChange={onGenderChange}

@@ -48,7 +48,9 @@ const DashboardLayout = ({ children, removePadding = false }) => {
               window.location.pathname
             )
               ? window.location.pathname
-              : "/",
+              : window.location.pathname.includes("/customer/")
+              ? "/customer/create"
+              : "",
           ]}
           items={navigationItems}
           onSelect={(info) => navigate(info.key)}

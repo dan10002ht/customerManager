@@ -22,7 +22,8 @@ export const addCustomer = async ({data}) => {
 };
 
 export const updateCustomer = async ({id, data}) => {
-  const toUpdateData = {...data, createdAt: new Date(data.createdAt), updatedAt: new Date()};
+  const {createdAt, ...rest} = data;
+  const toUpdateData = {...rest, updatedAt: new Date()};
   await collection.doc(id).update(toUpdateData);
   const [cacheData] = await getCacheByType('customer');
   if (!cacheData.find((x) => x.id === id)) {
@@ -30,7 +31,7 @@ export const updateCustomer = async ({id, data}) => {
       type: 'customer',
       dataJson: JSON.stringify([
         ...cacheData,
-        {...toUpdateData, id, searchName: convertVietnameseToEnglish(data.ten_khach_hang)},
+        {...toUpdateData, id, searchName: convertVietnameseToEnglish(rest.ten_khach_hang)},
       ]),
     });
   }

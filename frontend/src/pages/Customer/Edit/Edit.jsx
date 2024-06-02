@@ -35,6 +35,7 @@ const Edit = () => {
       value={{
         handleSave,
         onGenderChange,
+        form,
         gender: data.gender,
         loading: loading || editing,
         defaultData: data,

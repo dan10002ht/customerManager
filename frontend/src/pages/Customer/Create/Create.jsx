@@ -38,6 +38,7 @@ const Create = () => {
     if (!genderChange) return;
     setGender(genderChange);
   };
+  console.log(open);
 
   return (
     <CustomerFormContext.Provider
@@ -47,10 +48,18 @@ const Create = () => {
         gender,
         loading: creating,
         formType: "add",
+        form,
       }}
     >
       <CustomerForm />
-      <AfterModal open={open} handleOk={handleOk} handleCancel={handleCancel} />
+      {open && (
+        <AfterModal
+          open={open}
+          setOpen={setOpen}
+          handleOk={handleOk}
+          handleCancel={handleCancel}
+        />
+      )}
     </CustomerFormContext.Provider>
   );
 };
