@@ -10,6 +10,7 @@ const Create = () => {
   const [form] = Form.useForm();
   const [gender, setGender] = useState("");
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
   const { creating, handleCreate } = useCreateApi({
     url: "/customer",
     fullResp: true,
@@ -17,6 +18,7 @@ const Create = () => {
 
   const handleOk = () => {
     setOpen(false);
+    navigate("/customer/list");
   };
 
   const handleCancel = () => {
@@ -25,12 +27,10 @@ const Create = () => {
 
   const handleSave = async (values) => {
     if (creating) return;
-    console.log({ values });
     const resp = await handleCreate(values);
     if (resp.success) {
       form.resetFields();
       setOpen(true);
-      console.log(resp);
     }
   };
 
@@ -38,7 +38,6 @@ const Create = () => {
     if (!genderChange) return;
     setGender(genderChange);
   };
-  console.log(open);
 
   return (
     <CustomerFormContext.Provider

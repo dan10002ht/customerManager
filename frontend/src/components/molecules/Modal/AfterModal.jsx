@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Modal, Typography } from "antd";
 import checkIcon from "../../../assets/check-icon.png";
 
-const AfterModal = ({ open, handleCancel, setOpen }) => {
+const AfterModal = ({ open, handleCancel, handleOk, setOpen }) => {
   return (
     <Modal
       closable
@@ -11,7 +11,7 @@ const AfterModal = ({ open, handleCancel, setOpen }) => {
       handleOk={handleCancel}
       handleCancel={handleCancel}
       footer={null}
-      onCancel={() => setOpen(false)}
+      onCancel={handleOk}
     >
       <div
         style={{
