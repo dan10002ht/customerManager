@@ -78,11 +78,6 @@ const DashboardLayout = ({ children, removePadding = false }) => {
             {children}
           </div>
         </Content>
-        <Footer
-          style={{
-            textAlign: "center",
-          }}
-        ></Footer>
       </Layout>
     </Layout>
   );
