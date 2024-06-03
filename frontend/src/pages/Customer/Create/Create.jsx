@@ -37,6 +37,7 @@ const Create = () => {
   const onGenderChange = ({ gender: genderChange }) => {
     if (!genderChange) return;
     setGender(genderChange);
+    form.resetFields();
   };
 
   return (

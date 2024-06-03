@@ -114,9 +114,8 @@ export default function CustomerForm() {
           <Input placeholder="Email" />
         </Form.Item>
       </div>
-      <Form.Item>
-        <Typography.Title level={5}>Số đo cơ bản</Typography.Title>
-      </Form.Item>
+
+      <Typography.Title level={5}>Số đo cơ bản</Typography.Title>
 
       {genderOptions.map((optionGroup, index) => (
         <div key={index} className="Customer-Form__Control">
@@ -127,14 +126,16 @@ export default function CustomerForm() {
           ))}
         </div>
       ))}
-      <Button
-        loading={loading}
-        disabled={loading}
-        htmlType="submit"
-        type="primary"
-      >
-        {formType === "add" ? "Thêm khách hàng" : "Sửa khách hàng"}
-      </Button>
+      <div style={{ textAlign: "right" }}>
+        <Button
+          loading={loading}
+          disabled={loading}
+          htmlType="submit"
+          type="primary"
+        >
+          {formType === "add" ? "Thêm khách hàng" : "Sửa khách hàng"}
+        </Button>
+      </div>
     </Form>
   );
 }
