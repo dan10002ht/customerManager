@@ -15,6 +15,7 @@ import useDebounce from "../../../hooks/useDebounce";
 import { useNavigate } from "react-router-dom";
 import { mappingPlaceHolder } from "../../../const/mapping";
 import { convertVietnameseDateToJsDate } from "../../../helpers/prepareToGlobalDate";
+import NameModal from "../../molecules/Modal/NameModal/NameModal";
 const { RangePicker } = DatePicker;
 
 const CustomerTable = () => {
@@ -128,6 +129,9 @@ const CustomerTable = () => {
       {
         title: "Tên khách hàng",
         dataIndex: "ten_khach_hang",
+        render: (val, _data) => {
+          return <NameModal name={val} data={_data} />;
+        },
       },
       {
         title: "Giới tính",
