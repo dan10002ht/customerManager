@@ -38,6 +38,9 @@ const Create = () => {
     if (!genderChange) return;
     setGender(genderChange);
     form.resetFields();
+    form.setFieldsValue({
+      gender: genderChange,
+    });
   };
 
   return (
@@ -49,6 +52,7 @@ const Create = () => {
         loading: creating,
         formType: "add",
         form,
+        canChangeGender: true,
       }}
     >
       <CustomerForm />

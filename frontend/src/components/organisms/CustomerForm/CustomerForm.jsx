@@ -80,11 +80,11 @@ export default function CustomerForm() {
     loading,
     formType,
     form,
+    canChangeGender,
     defaultData = {},
   } = useContext(CustomerFormContext);
 
   const genderOptions = gender === "female" ? femaleOptions : maleOptions;
-
   return (
     <Form
       form={form}
@@ -97,12 +97,16 @@ export default function CustomerForm() {
       <Typography.Title level={3}>
         {formType === "add" ? "Thêm khách hàng" : "Sửa khách hàng"}
       </Typography.Title>
-      <Form.Item label="Giới tính" name="gender">
-        <Radio.Group value={gender}>
-          <Radio.Button value="male">Nam</Radio.Button>
-          <Radio.Button value="female">Nữ</Radio.Button>
-        </Radio.Group>
-      </Form.Item>
+      {canChangeGender ? (
+        <Form.Item label="Giới tính" name="gender">
+          <Radio.Group value={gender}>
+            <Radio.Button value="male">Nam</Radio.Button>
+            <Radio.Button value="female">Nữ</Radio.Button>
+          </Radio.Group>
+        </Form.Item>
+      ) : (
+        <label>Giới tính: {gender === "male" ? "Nam" : "Nữ"}</label>
+      )}
       <div className="Customer-Form__Control">
         <Form.Item name="ten_khach_hang" label="Tên khách hàng">
           <Input placeholder="Tên khách hàng" />

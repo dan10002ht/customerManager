@@ -10,6 +10,7 @@ import useEditApi from "../../../hooks/useEditApi";
 const Edit = () => {
   const [form] = Form.useForm();
   const { id } = useParams();
+  const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
   const { loading, fetched, handleChangeInput, data } = useFetchApi({
@@ -21,11 +22,21 @@ const Edit = () => {
     fullResp: true,
   });
 
+  const handleOk = () => {
+    setOpen(false);
+    navigate("/customer/list");
+  };
+
+  const handleCancel = () => {
+    setOpen(false);
+    navigate("/customer/list");
+  };
+
   const handleSave = async (values) => {
     if (editing) return;
     const resp = await handleEdit(values);
     if (resp.success) {
-      navigate("/customer/list");
+      setOpen(true);
     }
   };
 
@@ -44,9 +55,18 @@ const Edit = () => {
         loading: loading || editing,
         defaultData: data,
         formType: "edit",
+        canChangeGender: false,
       }}
     >
       {fetched && <CustomerForm />}
+      {open && (
+        <AfterModal
+          open={open}
+          setOpen={setOpen}
+          handleOk={handleOk}
+          handleCancel={handleCancel}
+        />
+      )}
     </CustomerFormContext.Provider>
   );
 };
