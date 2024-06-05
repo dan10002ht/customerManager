@@ -6,6 +6,7 @@ import useCreateApi from "../../../hooks/useCreateApi";
 import useFetchApi from "../../../hooks/useFetchApi";
 import { useNavigate, useParams } from "react-router-dom";
 import useEditApi from "../../../hooks/useEditApi";
+import AfterModal from "../../../components/molecules/Modal";
 
 const Edit = () => {
   const [form] = Form.useForm();
