@@ -29,7 +29,7 @@ const AfterModal = ({
         }}
       >
         <img style={{ width: "20%" }} src={checkIcon} />
-        <div style={{ fontSize: "30px", fontWeight: "600" }}>Thành công</div>
+        <div style={{ fontSize: "30px", fontWeight: "600" }}>{content}</div>
       </div>
     </Modal>
   );
