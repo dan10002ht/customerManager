@@ -8,15 +8,16 @@ import {createOrUpdateCache, getCacheByType} from './cacheRepository';
 const collection = db.collection('customer');
 
 export const addCustomer = async ({data}) => {
-  const toCreatedData = {...data, createdAt: new Date()};
+  const [cacheData, ,count] = await getCacheByType('customer');
+  const toCreatedData = {...data, createdAt: new Date(), userId: count + 1};
   const doc = await collection.add(toCreatedData);
-  const [cacheData] = await getCacheByType('customer');
   await createOrUpdateCache({
     type: 'customer',
     dataJson: JSON.stringify([
       ...cacheData,
       {...toCreatedData, id: doc.id, searchName: convertVietnameseToEnglish(data.ten_khach_hang)},
     ]),
+    isCreated: true
   });
   return doc.id;
 };

@@ -9,6 +9,8 @@ const Information = () => {
   const { id } = useParams();
   const { data, fetched } = useFetchApi({ url: `/customer/${id}` });
 
+  console.log({data})
+
   useEffect(() => {
     if (fetched) {
       window.print();

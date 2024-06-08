@@ -1,3 +1,4 @@
+import { FieldValue } from 'firebase-admin/firestore';
 import db from '../const/db';
 import convertVietnameseToEnglish from '../helpers/convertVietnameseToEnglish';
 
@@ -19,7 +20,7 @@ export const getCacheByType = async (
   const cacheDocs = await collection.where('type', '==', type).limit(1).get();
   if (cacheDocs.size > 0) {
     const [doc] = cacheDocs.docs;
-    const {dataJson} = doc.data();
+    const {dataJson, count} = doc.data();
     const cacheData = JSON.parse(dataJson).filter((data) => {
       const searchFilter =
         data?.[key]?.toLowerCase()?.includes(convertVietnameseToEnglish(search?.toLowerCase())) ||
@@ -27,16 +28,17 @@ export const getCacheByType = async (
       if (gender === 'all') return searchFilter;
       return searchFilter && data.gender === gender;
     });
-    return [cacheData, cacheDocs];
+    return [cacheData, cacheDocs, count];
   }
-  return [[], null];
+  return [[], null, 0];
 };
 
-export const createOrUpdateCache = async ({type, dataJson}) => {
+export const createOrUpdateCache = async ({type, dataJson, isCreated = false}) => {
   const [, cacheDocs] = await getCacheByType(type);
   const toUpdateData = {
     dataJson,
     updatedAt: new Date(),
+    count: FieldValue.increment(isCreated ? 1 : 0)
   };
 
   if (cacheDocs?.size > 0) {
@@ -47,5 +49,6 @@ export const createOrUpdateCache = async ({type, dataJson}) => {
   return collection.add({
     type,
     dataJson,
+    count: 1
   });
 };

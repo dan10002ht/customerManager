@@ -1,5 +1,7 @@
 import React from "react";
 import "./CommonInformationTemplate.scss";
+import dayjs from "dayjs";
+
 
 const CommonInformationTemplate = ({ children, data }) => {
   return (
@@ -13,8 +15,8 @@ const CommonInformationTemplate = ({ children, data }) => {
             <div className="Template-TopRight">
               <table>
                 <tr>
-                  <td style={{ width: "50%" }}>Ngày đến:</td>
-                  <td>ID: </td>
+                  <td style={{ width: "50%" }}>Ngày đến: {dayjs(new Date(data.createdAt)).format("DD/MM/YYYY")}</td>
+                  <td>ID: {data.userId}</td>
                 </tr>
                 <tr>
                   <td colSpan={2}>Ngày trả hàng:</td>
@@ -23,9 +25,9 @@ const CommonInformationTemplate = ({ children, data }) => {
             </div>
           </div>
           <div className="Template-Customer__Information">
-            <div className="">Tên khách hàng:</div>
-            <div className="">Số điện thoại:</div>
-            <div className="">Email:</div>
+            <div className="">Tên khách hàng: {data.ten_khach_hang}</div>
+            <div className="">Số điện thoại: {data.so_dien_thoai}</div>
+            <div className="">Email: {data.email}</div>
           </div>
           {children}
           <div className="Template-Note">

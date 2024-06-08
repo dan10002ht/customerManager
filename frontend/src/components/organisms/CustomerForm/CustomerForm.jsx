@@ -108,18 +108,18 @@ export default function CustomerForm() {
         <label>Giới tính: {gender === "male" ? "Nam" : "Nữ"}</label>
       )}
       <div className="Customer-Form__Control">
-        <Form.Item name="ten_khach_hang" label="Tên khách hàng">
+        <Form.Item rules={[{required: true,message: ""}]} name="ten_khach_hang" label="Tên khách hàng">
           <Input placeholder="Tên khách hàng" />
         </Form.Item>
-        <Form.Item name="so_dien_thoai" label="Số điện thoại">
+        <Form.Item rules={[{required: true,message: ""}]} name="so_dien_thoai" label="Số điện thoại">
           <Input placeholder="Số điện thoại" />
         </Form.Item>
-        <Form.Item name="email" label="Email">
+        <Form.Item rules={[{required: true,message: ""}]} name="email" label="Email">
           <Input placeholder="Email" />
         </Form.Item>
       </div>
 
-      <Typography.Title level={5}>Số đo cơ bản</Typography.Title>
+      <Typography.Title style={{fontSize: "18px"}} level={5}>Số đo cơ bản</Typography.Title>
 
       {genderOptions.map((optionGroup, index) => (
         <div key={index} className="Customer-Form__Control">

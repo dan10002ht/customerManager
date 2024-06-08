@@ -127,6 +127,10 @@ const CustomerTable = () => {
   const columns = useMemo(
     () => [
       {
+        title: "ID",
+        dataIndex: "userId",
+      },
+      {
         title: "Tên khách hàng",
         dataIndex: "ten_khach_hang",
         render: (val, _data) => {
@@ -181,19 +185,9 @@ const CustomerTable = () => {
     []
   );
 
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-
-  const onSelectChange = (newSelectedRowKeys) => {
-    setSelectedRowKeys(newSelectedRowKeys);
-  };
-  const rowSelection = {
-    selectedRowKeys,
-    onChange: onSelectChange,
-  };
-  const hasSelected = selectedRowKeys.length > 0;
   return (
     <Flex vertical gap="middle">
-      <Flex wrap gap="middle">
+      <Flex wrap="wrap" gap="middle" >
         <Select
           defaultValue="ten_khach_hang"
           style={{ width: 120 }}
@@ -255,7 +249,6 @@ const CustomerTable = () => {
         />
       </Flex>
       <Table
-        rowSelection={rowSelection}
         columns={columns}
         dataSource={data}
         pagination={false}
