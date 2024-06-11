@@ -10,6 +10,7 @@ const Create = () => {
   const [form] = Form.useForm();
   const [gender, setGender] = useState("");
   const [open, setOpen] = useState(false);
+  const [description, setDescription] = useState([]);
   const navigate = useNavigate();
   const { creating, handleCreate } = useCreateApi({
     url: "/customer",
@@ -27,7 +28,7 @@ const Create = () => {
 
   const handleSave = async (values) => {
     if (creating) return;
-    const resp = await handleCreate(values);
+    const resp = await handleCreate({ ...values, description });
     if (resp.success) {
       form.resetFields();
       setOpen(true);
@@ -43,6 +44,22 @@ const Create = () => {
     });
   };
 
+  const changeDescription = (val, index) => {
+    setDescription((prev) => {
+      const _d = [...prev];
+      _d[index] = val;
+      return _d;
+    });
+  };
+
+  const addDescription = () => {
+    setDescription((prev) => {
+      const _d = [...prev];
+      _d.push({ value: "", createdAt: new Date() });
+      return _d;
+    });
+  };
+
   return (
     <CustomerFormContext.Provider
       value={{
@@ -53,6 +70,9 @@ const Create = () => {
         formType: "add",
         form,
         canChangeGender: true,
+        defaultData: { description },
+        changeDescription,
+        addDescription,
       }}
     >
       <CustomerForm />

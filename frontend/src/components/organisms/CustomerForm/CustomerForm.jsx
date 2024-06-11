@@ -1,74 +1,89 @@
 import "./CustomerForm.scss";
 import React, { useContext } from "react";
-import { Button, Form, Input, Radio, Typography } from "antd";
+import { Button, Flex, Form, Input, Radio, Typography } from "antd";
 import CustomerFormContext from "../../../contexts/CustomerFormContext";
 
 const maleOptions = [
+  [{ title: "Áo" }],
   [
     {
+      label: "Kheo",
+      name: "kheo",
+    },
+    {
       label: "Vai",
-      value: "10",
       name: "vai",
     },
     {
       label: "Cổ",
-      value: "10",
       name: "co",
     },
-    {
-      label: "Ngực",
-      value: "10",
-      name: "nguc",
-    },
   ],
   [
-    { label: "Eo", value: "10", name: "eo" },
-    { label: "Mông", value: "x", name: "mong" },
-    { label: "Lưng", value: "x", name: "lung" },
+    { label: "Ngực", name: "nguc" },
+    { label: "Eo", name: "eo" },
+    { label: "Mông", name: "mong_ao" },
   ],
   [
-    { label: "Bắp tay", value: "10", name: "bap_tay" },
-    { label: "Bụm tay", value: "x", name: "bum_tay" },
-    { label: "Cúc tay", value: "x", name: "cuc_tay" },
+    { label: "Dài tay", name: "dai_tay" },
+    { label: "Bắp tay", name: "bap_tay" },
   ],
   [
-    { label: "Dài quần", value: "10", name: "dai_quan" },
-    { label: "Gối", value: "x", name: "goi" },
-    { label: "Bắp", value: "x", name: "bap" },
+    { label: "Bụng tay", name: "bung_tay" },
+    { label: "Cổ tay", name: "co_tay" },
+  ],
+  [{ title: "Quần" }],
+  [
+    { label: "Mông", name: "mong" },
+    { label: "Lưng", name: "lung" },
   ],
   [
-    { label: "Đũng", value: "10", name: "dung" },
-    { label: "Đùi", value: "x", name: "dui" },
+    { label: "Đũng", name: "dung" },
+    { label: "Dài quần", name: "dai_quan" },
+  ],
+  [
+    { label: "Đùi", name: "dui" },
+    { label: "Gối", name: "goi" },
   ],
 ];
 
 const femaleOptions = [
   [
-    { label: "Ngực", value: "10", name: "nguc" },
-    { label: "Vai", value: "x", name: "vai" },
-    { label: "Cổ", value: "x", name: "co" },
+    { label: "Vai", name: "vai" },
+    { label: "Cổ", name: "co" },
+    { label: "Kheo", name: "kheo" },
   ],
   [
-    { label: "Eo", value: "10", name: "eo" },
-    { label: "Lưng", value: "x", name: "lung" },
-    { label: "Mông", value: "x", name: "mong" },
+    { label: "Ngực", name: "nguc" },
+    { label: "Hạ ngực", name: "ha_nguc" },
+    { label: "Chân ngực", name: "chan_nguc" },
   ],
   [
-    { label: "Hạ ngực", value: "10", name: "ha_nguc" },
-    { label: "Hạ eo", value: "x", name: "ha_eo" },
+    { label: "Eo", name: "eo" },
+    { label: "Hạ eo", name: "ha_eo" },
   ],
   [
-    { label: "Dài áo", value: "10", name: "dai_ao" },
-    { label: "Dài tay", value: "x", name: "dai_tay" },
-    { label: "Bắp tay", value: "x", name: "bap_tay" },
+    { label: "Bắp tay", name: "bap_tay" },
+    { label: "Bàn tay", name: "ban_tay" },
+    { label: "Cánh tay", name: "canh_tay" },
   ],
   [
-    { label: "Bụm tay", value: "10", name: "bum_tay" },
-    { label: "Cúc tay", value: "x", name: "cuc_tay" },
+    { label: "Mông", name: "mong" },
+    { label: "Hạ mông", name: "ha_mong" },
   ],
   [
-    { label: "Dài quần", value: "10", name: "dai_quan" },
-    { label: "Đũng", value: "x", name: "dung" },
+    { label: "Đùi", name: "dui" },
+    { label: "Gối", name: "goi" },
+    { label: "Hạ gối", name: "ha_goi" },
+  ],
+  [
+    { label: "Bắp", name: "bap" },
+    { label: "Bụng", name: "bung" },
+    { label: "Chân", name: "chan" },
+  ],
+  [
+    { label: "Lưng", name: "lung" },
+    { label: "Đũng", name: "dung" },
   ],
 ];
 
@@ -81,6 +96,8 @@ export default function CustomerForm() {
     formType,
     form,
     canChangeGender,
+    changeDescription,
+    addDescription,
     defaultData = {},
   } = useContext(CustomerFormContext);
 
@@ -108,28 +125,60 @@ export default function CustomerForm() {
         <label>Giới tính: {gender === "male" ? "Nam" : "Nữ"}</label>
       )}
       <div className="Customer-Form__Control">
-        <Form.Item rules={[{required: true,message: ""}]} name="ten_khach_hang" label="Tên khách hàng">
+        <Form.Item
+          rules={[{ required: true, message: "" }]}
+          name="ten_khach_hang"
+          label="Tên khách hàng"
+        >
           <Input placeholder="Tên khách hàng" />
         </Form.Item>
-        <Form.Item rules={[{required: true,message: ""}]} name="so_dien_thoai" label="Số điện thoại">
+        <Form.Item
+          rules={[{ required: true, message: "" }]}
+          name="so_dien_thoai"
+          label="Số điện thoại"
+        >
           <Input placeholder="Số điện thoại" />
         </Form.Item>
-        <Form.Item rules={[{required: true,message: ""}]} name="email" label="Email">
+        <Form.Item
+          rules={[{ required: true, message: "" }]}
+          name="email"
+          label="Email"
+        >
           <Input placeholder="Email" />
         </Form.Item>
       </div>
 
-      <Typography.Title style={{fontSize: "18px"}} level={5}>Số đo cơ bản</Typography.Title>
+      <Typography.Title style={{ fontSize: "18px" }} level={5}>
+        Số đo cơ bản
+      </Typography.Title>
 
       {genderOptions.map((optionGroup, index) => (
         <div key={index} className="Customer-Form__Control">
-          {optionGroup.map((x) => (
-            <Form.Item name={x.name} key={x.label} label={x.label}>
-              <Input placeholder={x.label} />
-            </Form.Item>
-          ))}
+          {optionGroup.map((x) =>
+            x.title ? (
+              <Typography.Title style={{ fontSize: "18px" }} level={5}>
+                {x.title}:
+              </Typography.Title>
+            ) : (
+              <Form.Item name={x.name} key={x.label} label={x.label}>
+                <Input placeholder={x.label} />
+              </Form.Item>
+            )
+          )}
         </div>
       ))}
+      {defaultData.description.map((x, index) => (
+        <Flex gap="8px" style={{ marginBottom: "8px" }}>
+          <div style={{ width: "200px" }}>
+            <Input value={`STT: ${index}`} disabled />
+          </div>
+          <Input
+            value={x.value}
+            onChange={(e) => changeDescription(e.target.value, index)}
+          />
+        </Flex>
+      ))}
+      <Button onClick={addDescription}>Thêm ghi chú</Button>
       <div style={{ textAlign: "right" }}>
         <Button
           loading={loading}

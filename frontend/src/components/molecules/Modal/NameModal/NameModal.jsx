@@ -1,17 +1,28 @@
-import { Badge, Descriptions, Modal } from "antd";
+import { Badge, Checkbox, Descriptions, Flex, Input, Modal } from "antd";
 import React, { useState } from "react";
 import dayjs from "dayjs";
 
 const NameModal = ({ name, data }) => {
   const [open, setOpen] = useState(false);
+  const [selected, setSelected] = useState([]);
   const handleCancel = () => setOpen(false);
-  console.log({ data });
+  const handleOk = () => {};
+  const handleSelect = (e, index) =>
+    setSelected(() => {
+      if (e.target.checked) {
+        return [...selected, index];
+      } else {
+        return selected.filter((y) => y !== index);
+      }
+    });
+
   return (
     <>
       <div style={{ cursor: "pointer" }} onClick={() => setOpen(true)}>
         {name}
       </div>
       <Modal
+        okText="In"
         width={800}
         title={
           <div style={{ display: "flex", gap: "8px" }}>
@@ -31,6 +42,7 @@ const NameModal = ({ name, data }) => {
         }
         open={open}
         onCancel={handleCancel}
+        handleOk={handleOk}
       >
         <Descriptions
           bordered
@@ -111,6 +123,20 @@ const NameModal = ({ name, data }) => {
                 ]
           }
         />
+        <div style={{ marginTop: "8px" }}>
+          {data.description?.map((x, index) => (
+            <Flex gap="8px" style={{ marginBottom: "8px" }}>
+              <Checkbox
+                checked={selected.includes(index)}
+                onChange={(e) => handleSelect(e, index)}
+              />
+              <div style={{ width: "200px" }}>
+                <Input value={`STT: ${index}`} disabled />
+              </div>
+              <Input disabled value={x.value} />
+            </Flex>
+          ))}
+        </div>
       </Modal>
     </>
   );

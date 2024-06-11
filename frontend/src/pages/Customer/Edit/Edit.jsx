@@ -16,6 +16,7 @@ const Edit = () => {
 
   const { loading, fetched, handleChangeInput, data } = useFetchApi({
     url: `/customer/${id}`,
+    defaultData: { description: [] },
   });
 
   const { editing, handleEdit } = useEditApi({
@@ -35,7 +36,7 @@ const Edit = () => {
 
   const handleSave = async (values) => {
     if (editing) return;
-    const resp = await handleEdit(values);
+    const resp = await handleEdit({ ...values, description: data.description });
     if (resp.success) {
       setOpen(true);
     }
@@ -44,6 +45,25 @@ const Edit = () => {
   const onGenderChange = ({ gender: genderChange }) => {
     if (!genderChange) return;
     handleChangeInput("gender", genderChange);
+  };
+
+  const changeDescription = (val, index) => {
+    handleChangeInput(
+      "description",
+      data.description.map((x, _index) => {
+        if (_index === index) {
+          x.value = val;
+        }
+        return x;
+      })
+    );
+  };
+
+  const addDescription = () => {
+    handleChangeInput("description", [
+      ...data.description,
+      { value: "", createdAt: new Date() },
+    ]);
   };
 
   return (
@@ -57,6 +77,8 @@ const Edit = () => {
         defaultData: data,
         formType: "edit",
         canChangeGender: false,
+        changeDescription,
+        addDescription,
       }}
     >
       {fetched && <CustomerForm />}
