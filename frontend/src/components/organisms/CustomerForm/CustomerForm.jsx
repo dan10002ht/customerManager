@@ -3,6 +3,8 @@ import React, { useContext } from "react";
 import { Button, Flex, Form, Input, Radio, Typography } from "antd";
 import CustomerFormContext from "../../../contexts/CustomerFormContext";
 
+const { TextArea } = Input;
+
 const maleOptions = [
   [{ title: "Áo" }],
   [
@@ -156,7 +158,11 @@ export default function CustomerForm() {
         <div key={index} className="Customer-Form__Control">
           {optionGroup.map((x) =>
             x.title ? (
-              <Typography.Title style={{ fontSize: "18px" }} level={5}>
+              <Typography.Title
+                key={x.title}
+                style={{ fontSize: "18px" }}
+                level={5}
+              >
                 {x.title}:
               </Typography.Title>
             ) : (
@@ -167,18 +173,36 @@ export default function CustomerForm() {
           )}
         </div>
       ))}
+      <Flex style={{ marginBottom: "8px" }} justify="space-between">
+        <Typography.Title style={{ fontSize: "18px" }} level={5}>
+          Ghi chú
+        </Typography.Title>
+        <Button onClick={addDescription}>Thêm ghi chú</Button>
+      </Flex>
       {defaultData.description.map((x, index) => (
-        <Flex gap="8px" style={{ marginBottom: "8px" }}>
-          <div style={{ width: "200px" }}>
-            <Input value={`STT: ${index}`} disabled />
+        <Flex key={index} gap="8px" style={{ marginBottom: "8px" }}>
+          <div style={{ width: "300px" }}>
+            <Input
+              onKeyDown={(e) => {
+                e.key === "Enter" && e.preventDefault();
+              }}
+              placeholder="Hàng hóa"
+              value={x.merchandise}
+              onChange={(e) =>
+                changeDescription("merchandise", e.target.value, index)
+              }
+            />
           </div>
-          <Input
-            value={x.value}
-            onChange={(e) => changeDescription(e.target.value, index)}
+          <TextArea
+            autoSize={{ minRows: 2, maxRows: 6 }}
+            value={x.description}
+            placeholder="Ghi chú"
+            onChange={(e) =>
+              changeDescription("description", e.target.value, index)
+            }
           />
         </Flex>
       ))}
-      <Button onClick={addDescription}>Thêm ghi chú</Button>
       <div style={{ textAlign: "right" }}>
         <Button
           loading={loading}

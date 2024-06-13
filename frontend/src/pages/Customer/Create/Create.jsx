@@ -10,7 +10,9 @@ const Create = () => {
   const [form] = Form.useForm();
   const [gender, setGender] = useState("");
   const [open, setOpen] = useState(false);
-  const [description, setDescription] = useState([]);
+  const [description, setDescription] = useState([
+    { merchandise: "", description: "" },
+  ]);
   const navigate = useNavigate();
   const { creating, handleCreate } = useCreateApi({
     url: "/customer",
@@ -44,10 +46,10 @@ const Create = () => {
     });
   };
 
-  const changeDescription = (val, index) => {
+  const changeDescription = (key, val, index) => {
     setDescription((prev) => {
       const _d = [...prev];
-      _d[index] = val;
+      _d[index][key] = val;
       return _d;
     });
   };
@@ -55,7 +57,7 @@ const Create = () => {
   const addDescription = () => {
     setDescription((prev) => {
       const _d = [...prev];
-      _d.push({ value: "", createdAt: new Date() });
+      _d.push({ merchandise: "", description: "", createdAt: new Date() });
       return _d;
     });
   };

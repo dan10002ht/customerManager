@@ -1,12 +1,24 @@
-import { Badge, Checkbox, Descriptions, Flex, Input, Modal } from "antd";
+import {
+  Badge,
+  Checkbox,
+  Descriptions,
+  Flex,
+  Input,
+  Modal,
+  Typography,
+} from "antd";
 import React, { useState } from "react";
 import dayjs from "dayjs";
+
+const { TextArea } = Input;
 
 const NameModal = ({ name, data }) => {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState([]);
   const handleCancel = () => setOpen(false);
-  const handleOk = () => {};
+  const handleOk = () => {
+    window.open(`/information/${data.id}?ghi_chu=${selected.join(",")}`);
+  };
   const handleSelect = (e, index) =>
     setSelected(() => {
       if (e.target.checked) {
@@ -42,7 +54,7 @@ const NameModal = ({ name, data }) => {
         }
         open={open}
         onCancel={handleCancel}
-        handleOk={handleOk}
+        onOk={handleOk}
       >
         <Descriptions
           bordered
@@ -72,9 +84,9 @@ const NameModal = ({ name, data }) => {
             },
           ]}
         />
-        <div style={{ margin: "8px 0", fontSize: "16px", fontWeight: 600 }}>
+        <Typography.Title style={{ fontSize: "18px" }} level={5}>
           Số đo cơ bản
-        </div>
+        </Typography.Title>
         <Descriptions
           bordered
           column={4}
@@ -123,17 +135,25 @@ const NameModal = ({ name, data }) => {
                 ]
           }
         />
+        <Typography.Title style={{ fontSize: "18px" }} level={5}>
+          Ghi chú
+        </Typography.Title>
         <div style={{ marginTop: "8px" }}>
           {data.description?.map((x, index) => (
-            <Flex gap="8px" style={{ marginBottom: "8px" }}>
+            <Flex key={index} gap="8px" style={{ marginBottom: "8px" }}>
               <Checkbox
                 checked={selected.includes(index)}
                 onChange={(e) => handleSelect(e, index)}
               />
-              <div style={{ width: "200px" }}>
-                <Input value={`STT: ${index}`} disabled />
+              <div style={{ width: "300px" }}>
+                <Input placeholder="Hàng hóa" value={x.merchandise} disabled />
               </div>
-              <Input disabled value={x.value} />
+              <TextArea
+                autoSize={{ minRows: 2, maxRows: 6 }}
+                value={x.description}
+                placeholder="Ghi chú"
+                disabled
+              />
             </Flex>
           ))}
         </div>

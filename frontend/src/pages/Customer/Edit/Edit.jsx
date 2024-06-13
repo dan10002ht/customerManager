@@ -36,7 +36,12 @@ const Edit = () => {
 
   const handleSave = async (values) => {
     if (editing) return;
-    const resp = await handleEdit({ ...values, description: data.description });
+    const resp = await handleEdit({
+      ...values,
+      description: data.description.filter(
+        (x) => x.merchandise || x.description
+      ),
+    });
     if (resp.success) {
       setOpen(true);
     }
@@ -47,12 +52,12 @@ const Edit = () => {
     handleChangeInput("gender", genderChange);
   };
 
-  const changeDescription = (val, index) => {
+  const changeDescription = (key, val, index) => {
     handleChangeInput(
       "description",
       data.description.map((x, _index) => {
         if (_index === index) {
-          x.value = val;
+          x[key] = val;
         }
         return x;
       })
