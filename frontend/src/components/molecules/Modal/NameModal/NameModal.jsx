@@ -109,14 +109,6 @@ const NameModal = ({ name, data, customButton }) => {
                     label: "Cổ tay",
                     children: data.co_tay,
                   },
-                  { key: "Mông", label: "Mông", children: data.mong },
-                  { key: "Lưng", label: "Lưng", children: data.lung },
-                  { key: "Đũng", label: "Đũng", children: data.dung },
-                  {
-                    key: "Dài quần",
-                    label: "Dài quần",
-                    children: data.dai_quan,
-                  },
                   {
                     key: "Đùi",
                     label: "Đùi",
@@ -131,6 +123,15 @@ const NameModal = ({ name, data, customButton }) => {
                     key: "Bắp",
                     label: "Bắp",
                     children: data.bap,
+                  },
+                  { key: "Mông", label: "Mông", children: data.mong },
+                  { key: "Hạ mông", label: "Hạ mông", children: data.ha_mong },
+                  { key: "Lưng", label: "Lưng", children: data.lung },
+                  { key: "Đũng", label: "Đũng", children: data.dung },
+                  {
+                    key: "Dài quần",
+                    label: "Dài quần",
+                    children: data.dai_quan,
                   },
                 ]
               : [
@@ -147,11 +148,15 @@ const NameModal = ({ name, data, customButton }) => {
                   { key: "Eo", label: "Eo", children: data.eo },
                   { key: "Hạ eo", label: "Hạ eo", children: data.ha_eo },
                   { key: "Bắp tay", label: "Bắp tay", children: data.bap_tay },
-                  { key: "B tay", label: "B tay", children: data.b_tay },
                   {
-                    key: "Cánh tay",
-                    label: "Cánh tay",
-                    children: data.canh_tay,
+                    key: "Bụng tay",
+                    label: "Bụng tay",
+                    children: data.bung_tay,
+                  },
+                  {
+                    key: "Cửa tay",
+                    label: "Cửa tay",
+                    children: data.cua_tay,
                   },
                   { key: "Mông", label: "Mông", children: data.mong },
                   { key: "Hạ mông", label: "Hạ mông", children: data.ha_mong },
@@ -161,12 +166,15 @@ const NameModal = ({ name, data, customButton }) => {
                     children: data.dui,
                   },
                   { key: "Gối", label: "Gối", children: data.goi },
-                  { key: "Hạ gối", label: "Hạ gối", children: data.ha_goi },
-                  { key: "Bắp", label: "Bắp", children: data.bap },
-                  { key: "Bụng", label: "Bụng", children: data.bung },
-                  { key: "Chân", label: "Chân", children: data.chan },
+                  {
+                    key: "Bắp chân",
+                    label: "Bắp chân",
+                    children: data.bap_chan,
+                  },
                   { key: "Lưng", label: "Lưng", children: data.lung },
                   { key: "Đũng", label: "Đũng", children: data.dung },
+                  { key: "Hạ gối", label: "Hạ gối", children: data.ha_goi },
+                  { key: "Hạ lưng", label: "Hạ lưng", children: data.ha_lung },
                 ]
           }
         />

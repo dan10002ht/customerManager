@@ -32,6 +32,7 @@ const MaleCommon = ({ data }) => {
         <table>
           <tr>
             <td>Dài quần: {data.dai_quan}</td>
+            <td>Hạ mông: {data.ha_mong}</td>
           </tr>
           <tr>
             <td>Mông: {data.mong}</td>

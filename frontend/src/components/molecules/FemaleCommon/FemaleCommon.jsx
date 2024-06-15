@@ -28,8 +28,8 @@ const FemaleCommon = ({ data }) => {
         <table>
           <tr>
             <td>Bắp tay: {data.bap_tay}</td>
-            <td>B.tay: {data.b_tay}</td>
-            <td>Cánh tay: {data.canh_tay}</td>
+            <td>Bụng tay: {data.bung_tay}</td>
+            <td>Cửa tay: {data.cua_tay}</td>
           </tr>
           <tr>
             <td>Mông: {data.mong}</td>
@@ -43,16 +43,15 @@ const FemaleCommon = ({ data }) => {
           <tr>
             <td>Đùi: {data.dui}</td>
             <td>Gối: {data.goi}</td>
-            <td>Hạ gối: {data.ha_goi}</td>
-          </tr>
-          <tr>
-            <td>Bắp: {data.bap}</td>
-            <td>Bụng: {data.bung}</td>
-            <td>Chân: {data.chan}</td>
+            <td>Bắp chân: {data.bap_chan}</td>
           </tr>
           <tr>
             <td>Lưng: {data.lung}</td>
             <td>Đũng: {data.dung}</td>
+          </tr>
+          <tr>
+            <td>Hạ gối: {data.ha_goi}</td>
+            <td>Hạ lưng: {data.ha_lung}</td>
           </tr>
         </table>
       </div>

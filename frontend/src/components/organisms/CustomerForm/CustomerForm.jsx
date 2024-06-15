@@ -34,17 +34,18 @@ const maleOptions = [
     { label: "Cổ tay", name: "co_tay" },
   ],
   [
+    { label: "Đùi", name: "dui" },
+    { label: "Gối", name: "goi" },
+    { label: "Bắp", name: "bap" },
+  ],
+  [
     { label: "Mông", name: "mong" },
+    { label: "Hạ mông", name: "ha_mong" },
     { label: "Lưng", name: "lung" },
   ],
   [
     { label: "Đũng", name: "dung" },
     { label: "Dài quần", name: "dai_quan" },
-  ],
-  [
-    { label: "Đùi", name: "dui" },
-    { label: "Gối", name: "goi" },
-    { label: "Bắp", name: "bap" },
   ],
 ];
 
@@ -65,8 +66,8 @@ const femaleOptions = [
   ],
   [
     { label: "Bắp tay", name: "bap_tay" },
-    { label: "B.tay", name: "b_tay" },
-    { label: "Cánh tay", name: "canh_tay" },
+    { label: "Bụng tay", name: "bung_tay" },
+    { label: "Cửa tay", name: "cua_tay" },
   ],
   [
     { label: "Mông", name: "mong" },
@@ -75,16 +76,16 @@ const femaleOptions = [
   [
     { label: "Đùi", name: "dui" },
     { label: "Gối", name: "goi" },
-    { label: "Hạ gối", name: "ha_goi" },
-  ],
-  [
-    { label: "Bắp", name: "bap" },
-    { label: "Bụng", name: "bung" },
-    { label: "Chân", name: "chan" },
+    { label: "Bắp chân", name: "bap_chan" },
   ],
   [
     { label: "Lưng", name: "lung" },
     { label: "Đũng", name: "dung" },
+  ],
+
+  [
+    { label: "Hạ gối", name: "ha_goi" },
+    { label: "Hạ lưng", name: "ha_lung" },
   ],
 ];
 
