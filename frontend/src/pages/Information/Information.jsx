@@ -8,14 +8,18 @@ import FemaleCommon from "../../components/molecules/FemaleCommon";
 const Information = () => {
   const { id } = useParams();
   const [searchParams] = useSearchParams();
-  const indexArray = searchParams
-    .get("ghi_chu")
-    .split(",")
-    .map((x) => parseInt(x));
+  const ghiChu = searchParams.get("ghi_chu");
+  const indexArray = ghiChu ? ghiChu.split(",").map((x) => parseInt(x)) : [];
   const { data, fetched } = useFetchApi({ url: `/customer/${id}` });
 
-  console.log({ data });
-
+  const dataRender = indexArray.length
+    ? {
+        ...data,
+        description: data.description?.filter((_, index) =>
+          indexArray.includes(index)
+        ),
+      }
+    : data;
   useEffect(() => {
     if (fetched) {
       window.print();
@@ -23,12 +27,12 @@ const Information = () => {
   }, [fetched]);
   const commonMarkup =
     data.gender === "male" ? (
-      <MaleCommon data={data} />
+      <MaleCommon data={dataRender} />
     ) : (
-      <FemaleCommon data={data} />
+      <FemaleCommon data={dataRender} />
     );
   return (
-    <CommonInformationTemplate data={data}>
+    <CommonInformationTemplate data={dataRender}>
       {fetched && commonMarkup}
     </CommonInformationTemplate>
   );

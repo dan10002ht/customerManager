@@ -6,7 +6,6 @@ import CustomerFormContext from "../../../contexts/CustomerFormContext";
 const { TextArea } = Input;
 
 const maleOptions = [
-  [{ title: "Áo" }],
   [
     {
       label: "Kheo",
@@ -34,7 +33,6 @@ const maleOptions = [
     { label: "Bụng tay", name: "bung_tay" },
     { label: "Cổ tay", name: "co_tay" },
   ],
-  [{ title: "Quần" }],
   [
     { label: "Mông", name: "mong" },
     { label: "Lưng", name: "lung" },
@@ -46,6 +44,7 @@ const maleOptions = [
   [
     { label: "Đùi", name: "dui" },
     { label: "Gối", name: "goi" },
+    { label: "Bắp", name: "bap" },
   ],
 ];
 
@@ -66,7 +65,7 @@ const femaleOptions = [
   ],
   [
     { label: "Bắp tay", name: "bap_tay" },
-    { label: "Bàn tay", name: "ban_tay" },
+    { label: "B.tay", name: "b_tay" },
     { label: "Cánh tay", name: "canh_tay" },
   ],
   [

@@ -1,39 +1,37 @@
-import {
-  Badge,
-  Checkbox,
-  Descriptions,
-  Flex,
-  Input,
-  Modal,
-  Typography,
-} from "antd";
+import { Button, Descriptions, Flex, Modal, Typography } from "antd";
 import React, { useState } from "react";
 import dayjs from "dayjs";
+import AdvancedCheckbox from "../../AdvancedCheckbox/AdvancedCheckbox";
 
-const { TextArea } = Input;
-
-const NameModal = ({ name, data }) => {
+const NameModal = ({ name, data, customButton }) => {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState([]);
   const handleCancel = () => setOpen(false);
   const handleOk = () => {
     window.open(`/information/${data.id}?ghi_chu=${selected.join(",")}`);
   };
-  const handleSelect = (e, index) =>
+  const handleSelect = (checked, index) =>
     setSelected(() => {
-      if (e.target.checked) {
+      if (checked) {
         return [...selected, index];
       } else {
         return selected.filter((y) => y !== index);
       }
     });
 
+  const customFooter = !customButton ? { footer: null } : {};
+
   return (
     <>
-      <div style={{ cursor: "pointer" }} onClick={() => setOpen(true)}>
-        {name}
-      </div>
+      {customButton ? (
+        <Button onClick={() => setOpen(true)}>{customButton}</Button>
+      ) : (
+        <div style={{ cursor: "pointer" }} onClick={() => setOpen(true)}>
+          {name}
+        </div>
+      )}
       <Modal
+        {...customFooter}
         okText="In"
         width={800}
         title={
@@ -89,48 +87,85 @@ const NameModal = ({ name, data }) => {
         </Typography.Title>
         <Descriptions
           bordered
-          column={4}
+          column={3}
           items={
             data.gender === "male"
               ? [
+                  { key: "Kheo", label: "Kheo", children: data.kheo },
                   { key: "Vai", label: "Vai", children: data.vai },
                   { key: "Cổ", label: "Cổ", children: data.co },
                   { key: "Ngực", label: "Ngực", children: data.nguc },
                   { key: "Eo", label: "Eo", children: data.eo },
                   { key: "Mông", label: "Mông", children: data.mong },
-                  { key: "Lưng", label: "Lưng", children: data.lung },
-                  { key: "Bắp tay", label: "Bắp tay", children: data.bap_tay },
-                  { key: "Bụm tay", label: "Bụm tay", children: data.bum_tay },
-                  { key: "Cúc tay", label: "Cúc tay", children: data.cuc_tay },
-                  {
-                    key: "Dài quần",
-                    label: "Dài quần",
-                    children: data.dai_quan,
-                  },
-                  { key: "Gối", label: "Gối", children: data.goi },
-                  { key: "Bắp", label: "Bắp", children: data.bap },
-                  { key: "Đũng", label: "Đũng", children: data.dung },
-                  { key: "Đùi", label: "Đùi", children: data.dui },
-                ]
-              : [
-                  { key: "Ngực", label: "Ngực", children: data.nguc },
-                  { key: "Vai", label: "Vai", children: data.vai },
-                  { key: "Cổ", label: "Cổ", children: data.co },
-                  { key: "Eo", label: "Eo", children: data.eo },
-                  { key: "Lưng", label: "Lưng", children: data.lung },
-                  { key: "Mông", label: "Mông", children: data.mong },
-                  { key: "Hạ ngực", label: "Hạ ngực", children: data.ha_nguc },
-                  { key: "Hạ eo", label: "Hạ eo", children: data.ha_eo },
-                  { key: "Dài áo", label: "Dài áo", children: data.dai_ao },
                   { key: "Dài tay", label: "Dài tay", children: data.dai_tay },
                   { key: "Bắp tay", label: "Bắp tay", children: data.bap_tay },
-                  { key: "Bụm tay", label: "Bụm tay", children: data.bum_tay },
-                  { key: "Cúc tay", label: "Cúc tay", children: data.cuc_tay },
+                  {
+                    key: "Bụng tay",
+                    label: "Bụng tay",
+                    children: data.bung_tay,
+                  },
+                  {
+                    key: "Cổ tay",
+                    label: "Cổ tay",
+                    children: data.co_tay,
+                  },
+                  { key: "Mông", label: "Mông", children: data.mong },
+                  { key: "Lưng", label: "Lưng", children: data.lung },
+                  { key: "Đũng", label: "Đũng", children: data.dung },
                   {
                     key: "Dài quần",
                     label: "Dài quần",
                     children: data.dai_quan,
                   },
+                  {
+                    key: "Đùi",
+                    label: "Đùi",
+                    children: data.dui,
+                  },
+                  {
+                    key: "Gối",
+                    label: "Gối",
+                    children: data.goi,
+                  },
+                  {
+                    key: "Bắp",
+                    label: "Bắp",
+                    children: data.bap,
+                  },
+                ]
+              : [
+                  { key: "Vai", label: "Vai", children: data.vai },
+                  { key: "Cổ", label: "Cổ", children: data.co },
+                  { key: "Kheo", label: "Kheo", children: data.kheo },
+                  { key: "Ngực", label: "Ngực", children: data.nguc },
+                  { key: "Hạ ngực", label: "Hạ ngực", children: data.ha_nguc },
+                  {
+                    key: "Chân ngực",
+                    label: "Chân ngực",
+                    children: data.chan_nguc,
+                  },
+                  { key: "Eo", label: "Eo", children: data.eo },
+                  { key: "Hạ eo", label: "Hạ eo", children: data.ha_eo },
+                  { key: "Bắp tay", label: "Bắp tay", children: data.bap_tay },
+                  { key: "B tay", label: "B tay", children: data.b_tay },
+                  {
+                    key: "Cánh tay",
+                    label: "Cánh tay",
+                    children: data.canh_tay,
+                  },
+                  { key: "Mông", label: "Mông", children: data.mong },
+                  { key: "Hạ mông", label: "Hạ mông", children: data.ha_mong },
+                  {
+                    key: "Đùi",
+                    label: "Đùi",
+                    children: data.dui,
+                  },
+                  { key: "Gối", label: "Gối", children: data.goi },
+                  { key: "Hạ gối", label: "Hạ gối", children: data.ha_goi },
+                  { key: "Bắp", label: "Bắp", children: data.bap },
+                  { key: "Bụng", label: "Bụng", children: data.bung },
+                  { key: "Chân", label: "Chân", children: data.chan },
+                  { key: "Lưng", label: "Lưng", children: data.lung },
                   { key: "Đũng", label: "Đũng", children: data.dung },
                 ]
           }
@@ -138,25 +173,17 @@ const NameModal = ({ name, data }) => {
         <Typography.Title style={{ fontSize: "18px" }} level={5}>
           Ghi chú
         </Typography.Title>
-        <div style={{ marginTop: "8px" }}>
+        <Flex vertical gap="8px" style={{ marginTop: "8px" }}>
           {data.description?.map((x, index) => (
-            <Flex key={index} gap="8px" style={{ marginBottom: "8px" }}>
-              <Checkbox
-                checked={selected.includes(index)}
-                onChange={(e) => handleSelect(e, index)}
-              />
-              <div style={{ width: "300px" }}>
-                <Input placeholder="Hàng hóa" value={x.merchandise} disabled />
-              </div>
-              <TextArea
-                autoSize={{ minRows: 2, maxRows: 6 }}
-                value={x.description}
-                placeholder="Ghi chú"
-                disabled
-              />
-            </Flex>
+            <AdvancedCheckbox
+              key={index}
+              data={x}
+              isActive={selected.includes(index)}
+              onToggle={() => handleSelect(!selected.includes(index), index)}
+              disableSelected={!customButton}
+            />
           ))}
-        </div>
+        </Flex>
       </Modal>
     </>
   );

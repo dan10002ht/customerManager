@@ -170,13 +170,7 @@ const CustomerTable = () => {
               >
                 Sửa
               </Button>
-              <Button
-                onClick={() => {
-                  window.open(`/information/${_data.id}`);
-                }}
-              >
-                In
-              </Button>
+              <NameModal customButton={"In"} data={_data} />
             </Flex>
           );
         },
@@ -187,7 +181,7 @@ const CustomerTable = () => {
 
   return (
     <Flex vertical gap="middle">
-      <Flex wrap="wrap" gap="middle" >
+      <Flex wrap="wrap" gap="middle">
         <Select
           defaultValue="ten_khach_hang"
           style={{ width: 120 }}

@@ -8,22 +8,22 @@ const MaleCommon = ({ data }) => {
       <div>
         <table>
           <tr>
-            <td colSpan={3}>Dài quần/áo/váy:</td>
-          </tr>
-          <tr>
+            <td>Kheo: {data.kheo}</td>
             <td>Vai: {data.vai}</td>
             <td>Cổ: {data.co}</td>
-            <td>Ngực: {data.nguc}</td>
           </tr>
           <tr>
+            <td>Ngực: {data.nguc}</td>
             <td>Eo: {data.eo}</td>
             <td>Mông: {data.mong}</td>
-            <td>Lưng: {data.lung}</td>
           </tr>
           <tr>
+            <td>Dài tay: {data.dai_tay}</td>
             <td>Bắp tay: {data.bap_tay}</td>
-            <td>Bụm tay: {data.bum_tay}</td>
-            <td>Cúc tay: {data.cuc_tay}</td>
+          </tr>
+          <tr>
+            <td>Bụng tay: {data.bung_tay}</td>
+            <td>Cổ tay: {data.co_tay}</td>
           </tr>
         </table>
       </div>
@@ -32,12 +32,16 @@ const MaleCommon = ({ data }) => {
         <table>
           <tr>
             <td>Dài quần: {data.dai_quan}</td>
-            <td>Gối: {data.goi}</td>
-            <td>Bắp: {data.bap}</td>
           </tr>
           <tr>
+            <td>Mông: {data.mong}</td>
+            <td>Lưng: {data.lung}</td>
             <td>Đũng: {data.dung}</td>
+          </tr>
+          <tr>
             <td>Đùi: {data.dui}</td>
+            <td>Gối: {data.goi}</td>
+            <td>Bắp: {data.bap}</td>
           </tr>
         </table>
       </div>

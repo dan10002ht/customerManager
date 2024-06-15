@@ -1,0 +1,20 @@
+.Customer-Description__CheckBox {
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  padding: 8px;
+  &.--Active {
+    border: 2px solid #1677ff;
+  }
+  &.--Selectable {
+    cursor: pointer;
+    &:hover {
+      background: #ececec;
+    }
+  }
+  display: flex;
+  gap: 8px;
+  .Customer-Description__LabelItem {
+    width: 30%;
+    border-right: 3px solid #ccc;
+  }
+}

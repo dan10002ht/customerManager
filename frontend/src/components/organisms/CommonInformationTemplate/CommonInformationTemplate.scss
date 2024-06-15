@@ -46,6 +46,9 @@
         justify-content: center;
       }
       .Template-TopLeft {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
         font-weight: 600;
       }
     }
@@ -61,10 +64,10 @@
           th,
           td {
             &:first-child {
-              width: 20%;
+              width: 30%;
             }
             &:nth-child(2) {
-              width: 10%;
+              width: 30%;
             }
           }
         }
