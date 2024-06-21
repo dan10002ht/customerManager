@@ -108,10 +108,12 @@ const NameModal = ({ name, data, customButton }) => {
           </Typography.Title>
           {optionData.map((optionGroup, index) => (
             <>
-              <Checkbox
-                onChange={() => handleSelect(index, setSelectedSections)}
-                checked={selectedSections.includes(index)}
-              />
+              {customButton && (
+                <Checkbox
+                  onChange={() => handleSelect(index, setSelectedSections)}
+                  checked={selectedSections.includes(index)}
+                />
+              )}
               <Descriptions
                 onClick={() => {
                   if (!customButton) return;
