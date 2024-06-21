@@ -1,11 +1,15 @@
 import React from "react";
 import { maleFirstSection, maleSecondSection } from "../../../const/options";
 
-const MaleCommon = ({ data }) => {
+const MaleCommon = ({ data, sectionArray }) => {
+  const sections = [maleFirstSection, maleSecondSection];
+  const mappingSection = !sectionArray.length
+    ? sections
+    : sections.filter((_, index) => sectionArray.includes(index));
   return (
     <div className="Gender-Common">
       <div style={{ fontWeight: 600 }}>Số đo cơ bản</div>
-      {[maleFirstSection, maleSecondSection].map((section, index) => (
+      {mappingSection.map((section, index) => (
         <>
           <div>{index + 1}.</div>
           <div>

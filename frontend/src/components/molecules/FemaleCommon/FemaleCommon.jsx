@@ -4,11 +4,15 @@ import {
   femaleSecondSection,
 } from "../../../const/options";
 
-const FemaleCommon = ({ data }) => {
+const FemaleCommon = ({ data, sectionArray }) => {
+  const sections = [femaleFirstSection, femaleSecondSection];
+  const mappingSection = !sectionArray.length
+    ? sections
+    : sections.filter((_, index) => sectionArray.includes(index));
   return (
     <div className="Gender-Common">
       <div style={{ fontWeight: 600 }}>Số đo cơ bản</div>
-      {[femaleFirstSection, femaleSecondSection].map((section, index) => (
+      {mappingSection.map((section, index) => (
         <>
           <div>{index + 1}.</div>
           <div>

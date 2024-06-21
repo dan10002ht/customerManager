@@ -86,3 +86,9 @@ export const femaleSecondSection = femaleOptions.slice(4);
 
 export const maleFirstSection = maleOptions.slice(0, 3);
 export const maleSecondSection = maleOptions.slice(3);
+
+export const splitedFemaleSectionOptions = [
+  femaleFirstSection,
+  femaleSecondSection,
+];
+export const splitedMaleSectionOptions = [maleFirstSection, maleSecondSection];

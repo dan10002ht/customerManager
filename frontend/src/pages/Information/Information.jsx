@@ -9,7 +9,11 @@ const Information = () => {
   const { id } = useParams();
   const [searchParams] = useSearchParams();
   const ghiChu = searchParams.get("ghi_chu");
+  const sectionData = searchParams.get("sectionData");
   const indexArray = ghiChu ? ghiChu.split(",").map((x) => parseInt(x)) : [];
+  const sectionArray = sectionData
+    ? sectionData.split(",").map((x) => parseInt(x))
+    : [];
   const { data, fetched } = useFetchApi({ url: `/customer/${id}` });
 
   const dataRender = indexArray.length
@@ -27,9 +31,9 @@ const Information = () => {
   }, [fetched]);
   const commonMarkup =
     data.gender === "male" ? (
-      <MaleCommon data={dataRender} />
+      <MaleCommon data={dataRender} sectionArray={sectionArray} />
     ) : (
-      <FemaleCommon data={dataRender} />
+      <FemaleCommon data={dataRender} sectionArray={sectionArray} />
     );
   return (
     <CommonInformationTemplate data={dataRender}>

@@ -2,27 +2,40 @@ import { Button, Descriptions, Flex, Modal, Typography } from "antd";
 import React, { useState } from "react";
 import dayjs from "dayjs";
 import AdvancedCheckbox from "../../AdvancedCheckbox/AdvancedCheckbox";
-import { femaleOptions, maleOptions } from "../../../../const/options";
+import {
+  femaleOptions,
+  maleOptions,
+  splitedFemaleSectionOptions,
+  splitedMaleSectionOptions,
+} from "../../../../const/options";
 
 const NameModal = ({ name, data, customButton }) => {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState([]);
+  const [selectedSections, setSelectedSections] = useState([]);
   const handleCancel = () => setOpen(false);
   const handleOk = () => {
-    window.open(`/information/${data.id}?ghi_chu=${selected.join(",")}`);
+    window.open(
+      `/information/${data.id}?ghi_chu=${selected.join(
+        ","
+      )}&sectionData=${selectedSections.join(",")}`
+    );
   };
-  const handleSelect = (checked, index) =>
-    setSelected(() => {
-      if (checked) {
-        return [...selected, index];
+  const handleSelect = (index, setSelectFunc = setSelected) =>
+    setSelectFunc((prev) => {
+      if (!prev.includes(index)) {
+        return [...prev, index];
       } else {
-        return selected.filter((y) => y !== index);
+        return prev.filter((y) => y !== index);
       }
     });
 
   const customFooter = !customButton ? { footer: null } : {};
 
-  const optionData = data.gender === "male" ? maleOptions : femaleOptions;
+  const optionData =
+    data.gender === "male"
+      ? splitedMaleSectionOptions
+      : splitedFemaleSectionOptions;
 
   return (
     <>
@@ -57,67 +70,82 @@ const NameModal = ({ name, data, customButton }) => {
         onCancel={handleCancel}
         onOk={handleOk}
       >
-        <Descriptions
-          bordered
-          labelStyle={{
-            background: "rgba(0 ,0 ,0 , 0.05)",
-            fontWeight: "600",
-          }}
-          column={2}
-          items={[
-            {
-              key: "name",
-              label: "Tên khách hàng",
-              children: data.ten_khach_hang,
-            },
-            {
-              key: "email",
-              label: "Email",
-              children: data.email,
-            },
-            {
-              key: "name",
-              label: "Số điện thoại",
-              children: data.so_dien_thoai,
-            },
-            {
-              key: "name",
-              label: "Ngày tạo",
-              children: dayjs(new Date(data.createdAt)).format(
-                "hh:mm DD/MM/YYYY"
-              ),
-            },
-          ]}
-        />
-        <Typography.Title style={{ fontSize: "18px" }} level={5}>
-          Số đo cơ bản
-        </Typography.Title>
-        <Descriptions
-          labelStyle={{
-            background: "rgba(0 ,0 ,0 , 0.05)",
-            fontWeight: "600",
-          }}
-          bordered
-          column={3}
-          items={optionData.flat().map((x) => ({
-            key: x.label,
-            label: x.label,
-            children: data[x.name],
-          }))}
-        />
-        <Typography.Title style={{ fontSize: "18px" }} level={5}>
-          Ghi chú
-        </Typography.Title>
-        <Flex vertical gap="8px" style={{ marginTop: "8px" }}>
-          {data.description?.map((x, index) => (
-            <AdvancedCheckbox
-              key={index}
-              data={x}
-              isActive={selected.includes(index)}
-              onToggle={() => handleSelect(!selected.includes(index), index)}
-              disableSelected={!customButton}
+        <Flex vertical gap="8px">
+          <Descriptions
+            bordered
+            labelStyle={{
+              background: "rgba(0 ,0 ,0 , 0.05)",
+              fontWeight: "600",
+            }}
+            column={2}
+            items={[
+              {
+                key: "name",
+                label: "Tên khách hàng",
+                children: data.ten_khach_hang,
+              },
+              {
+                key: "email",
+                label: "Email",
+                children: data.email,
+              },
+              {
+                key: "name",
+                label: "Số điện thoại",
+                children: data.so_dien_thoai,
+              },
+              {
+                key: "name",
+                label: "Ngày tạo",
+                children: dayjs(new Date(data.createdAt)).format(
+                  "hh:mm DD/MM/YYYY"
+                ),
+              },
+            ]}
+          />
+          <Typography.Title style={{ fontSize: "18px" }} level={5}>
+            Số đo cơ bản
+          </Typography.Title>
+          {optionData.map((optionGroup, index) => (
+            <Descriptions
+              onClick={() => {
+                if (!customButton) return;
+                handleSelect(index, setSelectedSections);
+              }}
+              labelStyle={{
+                background: "rgba(0 ,0 ,0 , 0.05)",
+                fontWeight: "600",
+              }}
+              className={[
+                "Description-Section",
+                customButton && "--Custom-Button",
+                selectedSections.includes(index) && "--Active",
+              ]
+                .filter(Boolean)
+                .join(" ")}
+              bordered
+              column={3}
+              items={optionGroup.flat().map((x) => ({
+                key: x.label,
+                label: x.label,
+                children: data[x.name],
+              }))}
             />
           ))}
+          <Typography.Title style={{ fontSize: "18px" }} level={5}>
+            Ghi chú
+          </Typography.Title>
+          <Flex vertical gap="8px" style={{ marginTop: "8px" }}>
+            {data.description?.map((x, index) => (
+              <AdvancedCheckbox
+                key={index}
+                data={x}
+                isActive={selected.includes(index)}
+                onToggle={() => handleSelect(index)}
+                disableSelected={!customButton}
+              />
+            ))}
+          </Flex>
         </Flex>
       </Modal>
     </>

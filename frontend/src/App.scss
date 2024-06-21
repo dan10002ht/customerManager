@@ -72,6 +72,15 @@ main {
   }
 }
 
+.Description-Section {
+  &.--Custom-Button {
+    cursor: pointer;
+  }
+  &.--Active {
+    outline: 3px solid #1677ff;
+  }
+}
+
 // .ant-descriptions-view {
 //   border-color: #ccc !important;
 //   .ant-descriptions-item-label,
