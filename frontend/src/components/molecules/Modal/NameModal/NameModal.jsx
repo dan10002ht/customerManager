@@ -1,4 +1,4 @@
-import { Button, Descriptions, Flex, Modal, Typography } from "antd";
+import { Button, Checkbox, Descriptions, Flex, Modal, Typography } from "antd";
 import React, { useState } from "react";
 import dayjs from "dayjs";
 import AdvancedCheckbox from "../../AdvancedCheckbox/AdvancedCheckbox";
@@ -107,30 +107,36 @@ const NameModal = ({ name, data, customButton }) => {
             Số đo cơ bản
           </Typography.Title>
           {optionData.map((optionGroup, index) => (
-            <Descriptions
-              onClick={() => {
-                if (!customButton) return;
-                handleSelect(index, setSelectedSections);
-              }}
-              labelStyle={{
-                background: "rgba(0 ,0 ,0 , 0.05)",
-                fontWeight: "600",
-              }}
-              className={[
-                "Description-Section",
-                customButton && "--Custom-Button",
-                selectedSections.includes(index) && "--Active",
-              ]
-                .filter(Boolean)
-                .join(" ")}
-              bordered
-              column={3}
-              items={optionGroup.flat().map((x) => ({
-                key: x.label,
-                label: x.label,
-                children: data[x.name],
-              }))}
-            />
+            <>
+              <Checkbox
+                onChange={() => handleSelect(index, setSelectedSections)}
+                checked={selectedSections.includes(index)}
+              />
+              <Descriptions
+                onClick={() => {
+                  if (!customButton) return;
+                  handleSelect(index, setSelectedSections);
+                }}
+                labelStyle={{
+                  background: "rgba(0 ,0 ,0 , 0.05)",
+                  fontWeight: "600",
+                }}
+                className={[
+                  "Description-Section",
+                  customButton && "--Custom-Button",
+                  selectedSections.includes(index) && "--Active",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+                bordered
+                column={3}
+                items={optionGroup.flat().map((x) => ({
+                  key: x.label,
+                  label: x.label,
+                  children: data[x.name],
+                }))}
+              />
+            </>
           ))}
           <Typography.Title style={{ fontSize: "18px" }} level={5}>
             Ghi chú
