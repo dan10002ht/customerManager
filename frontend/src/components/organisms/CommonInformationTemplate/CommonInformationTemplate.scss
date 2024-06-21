@@ -13,6 +13,9 @@
   }
 }
 .Template {
+  * {
+    color: red;
+  }
   width: 100%;
   display: flex;
   align-items: center;
@@ -58,27 +61,36 @@
       gap: 4px;
     }
     .Template-Note {
+      * {
+        font-size: 26px;
+      }
       table {
         width: 100%;
+        th {
+          font-size: 16px;
+        }
         tr {
           th,
           td {
             &:first-child {
-              width: 30%;
+              width: 10%;
             }
             &:nth-child(2) {
-              width: 30%;
+              width: 20%;
             }
           }
         }
       }
       .Template-Note__Bottom {
         td {
-          height: 90px;
+          padding: 8px;
         }
       }
     }
     .Gender-Common {
+      * {
+        font-size: 26px;
+      }
       display: flex;
       flex-direction: column;
       gap: 8px;

@@ -1,51 +1,28 @@
 import React from "react";
+import { maleFirstSection, maleSecondSection } from "../../../const/options";
 
 const MaleCommon = ({ data }) => {
   return (
     <div className="Gender-Common">
       <div style={{ fontWeight: 600 }}>Số đo cơ bản</div>
-      <div>1.</div>
-      <div>
-        <table>
-          <tr>
-            <td>Kheo: {data.kheo}</td>
-            <td>Vai: {data.vai}</td>
-            <td>Cổ: {data.co}</td>
-          </tr>
-          <tr>
-            <td>Ngực: {data.nguc}</td>
-            <td>Eo: {data.eo}</td>
-            <td>Mông: {data.mong}</td>
-          </tr>
-          <tr>
-            <td>Dài tay: {data.dai_tay}</td>
-            <td>Bắp tay: {data.bap_tay}</td>
-          </tr>
-          <tr>
-            <td>Bụng tay: {data.bung_tay}</td>
-            <td>Cổ tay: {data.co_tay}</td>
-          </tr>
-        </table>
-      </div>
-      <div>2.</div>
-      <div>
-        <table>
-          <tr>
-            <td>Dài quần: {data.dai_quan}</td>
-            <td>Hạ mông: {data.ha_mong}</td>
-          </tr>
-          <tr>
-            <td>Mông: {data.mong}</td>
-            <td>Lưng: {data.lung}</td>
-            <td>Đũng: {data.dung}</td>
-          </tr>
-          <tr>
-            <td>Đùi: {data.dui}</td>
-            <td>Gối: {data.goi}</td>
-            <td>Bắp: {data.bap}</td>
-          </tr>
-        </table>
-      </div>
+      {[maleFirstSection, maleSecondSection].map((section, index) => (
+        <>
+          <div>{index + 1}.</div>
+          <div>
+            <table>
+              {section.map((options, _index) => (
+                <tr key={_index}>
+                  {options.map((x) => (
+                    <td key={x.label}>
+                      {x.label}: {data[x.name]}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </table>
+          </div>
+        </>
+      ))}
     </div>
   );
 };

@@ -2,92 +2,10 @@ import "./CustomerForm.scss";
 import React, { useContext } from "react";
 import { Button, Flex, Form, Input, Radio, Typography } from "antd";
 import CustomerFormContext from "../../../contexts/CustomerFormContext";
+import { femaleOptions, maleOptions } from "../../../const/options";
 
 const { TextArea } = Input;
 
-const maleOptions = [
-  [
-    {
-      label: "Kheo",
-      name: "kheo",
-    },
-    {
-      label: "Vai",
-      name: "vai",
-    },
-    {
-      label: "Cổ",
-      name: "co",
-    },
-  ],
-  [
-    { label: "Ngực", name: "nguc" },
-    { label: "Eo", name: "eo" },
-    { label: "Mông", name: "mong_ao" },
-  ],
-  [
-    { label: "Dài tay", name: "dai_tay" },
-    { label: "Bắp tay", name: "bap_tay" },
-  ],
-  [
-    { label: "Bụng tay", name: "bung_tay" },
-    { label: "Cổ tay", name: "co_tay" },
-  ],
-  [
-    { label: "Đùi", name: "dui" },
-    { label: "Gối", name: "goi" },
-    { label: "Bắp", name: "bap" },
-  ],
-  [
-    { label: "Mông", name: "mong" },
-    { label: "Hạ mông", name: "ha_mong" },
-    { label: "Lưng", name: "lung" },
-  ],
-  [
-    { label: "Đũng", name: "dung" },
-    { label: "Dài quần", name: "dai_quan" },
-  ],
-];
-
-const femaleOptions = [
-  [
-    { label: "Vai", name: "vai" },
-    { label: "Cổ", name: "co" },
-    { label: "Kheo", name: "kheo" },
-  ],
-  [
-    { label: "Ngực", name: "nguc" },
-    { label: "Hạ ngực", name: "ha_nguc" },
-    { label: "Chân ngực", name: "chan_nguc" },
-  ],
-  [
-    { label: "Eo", name: "eo" },
-    { label: "Hạ eo", name: "ha_eo" },
-  ],
-  [
-    { label: "Bắp tay", name: "bap_tay" },
-    { label: "Bụng tay", name: "bung_tay" },
-    { label: "Cửa tay", name: "cua_tay" },
-  ],
-  [
-    { label: "Mông", name: "mong" },
-    { label: "Hạ mông", name: "ha_mong" },
-  ],
-  [
-    { label: "Đùi", name: "dui" },
-    { label: "Gối", name: "goi" },
-    { label: "Bắp chân", name: "bap_chan" },
-  ],
-  [
-    { label: "Lưng", name: "lung" },
-    { label: "Đũng", name: "dung" },
-  ],
-
-  [
-    { label: "Hạ gối", name: "ha_goi" },
-    { label: "Hạ lưng", name: "ha_lung" },
-  ],
-];
 
 export default function CustomerForm() {
   const {
@@ -179,9 +97,10 @@ export default function CustomerForm() {
         </Typography.Title>
         <Button onClick={addDescription}>Thêm ghi chú</Button>
       </Flex>
-      {defaultData.description.map((x, index) => (
+     <Flex vertical gap="16px">
+     {defaultData.description.map((x, index) => (
         <Flex key={index} gap="8px" style={{ marginBottom: "8px" }}>
-          <div style={{ width: "300px" }}>
+          <div style={{ width: "300px", display: "flex", flexDirection: "column", gap: "8px" }}>
             <Input
               onKeyDown={(e) => {
                 e.key === "Enter" && e.preventDefault();
@@ -192,9 +111,18 @@ export default function CustomerForm() {
                 changeDescription("merchandise", e.target.value, index)
               }
             />
+            <Input
+              onKeyDown={(e) => {
+                e.key === "Enter" && e.preventDefault();
+              }}
+              placeholder="Thợ"
+              value={x.tailor}
+              onChange={(e) =>
+                changeDescription("tailor", e.target.value, index)
+              }
+            />
           </div>
           <TextArea
-            autoSize={{ minRows: 2, maxRows: 6 }}
             value={x.description}
             placeholder="Ghi chú"
             onChange={(e) =>
@@ -203,6 +131,7 @@ export default function CustomerForm() {
           />
         </Flex>
       ))}
+     </Flex>
       <div style={{ textAlign: "right" }}>
         <Button
           loading={loading}

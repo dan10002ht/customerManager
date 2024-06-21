@@ -2,6 +2,7 @@ import { Button, Descriptions, Flex, Modal, Typography } from "antd";
 import React, { useState } from "react";
 import dayjs from "dayjs";
 import AdvancedCheckbox from "../../AdvancedCheckbox/AdvancedCheckbox";
+import { femaleOptions, maleOptions } from "../../../../const/options";
 
 const NameModal = ({ name, data, customButton }) => {
   const [open, setOpen] = useState(false);
@@ -20,6 +21,8 @@ const NameModal = ({ name, data, customButton }) => {
     });
 
   const customFooter = !customButton ? { footer: null } : {};
+
+  const optionData = data.gender === "male" ? maleOptions : femaleOptions;
 
   return (
     <>
@@ -56,6 +59,10 @@ const NameModal = ({ name, data, customButton }) => {
       >
         <Descriptions
           bordered
+          labelStyle={{
+            background: "rgba(0 ,0 ,0 , 0.05)",
+            fontWeight: "600",
+          }}
           column={2}
           items={[
             {
@@ -86,97 +93,17 @@ const NameModal = ({ name, data, customButton }) => {
           Số đo cơ bản
         </Typography.Title>
         <Descriptions
+          labelStyle={{
+            background: "rgba(0 ,0 ,0 , 0.05)",
+            fontWeight: "600",
+          }}
           bordered
           column={3}
-          items={
-            data.gender === "male"
-              ? [
-                  { key: "Kheo", label: "Kheo", children: data.kheo },
-                  { key: "Vai", label: "Vai", children: data.vai },
-                  { key: "Cổ", label: "Cổ", children: data.co },
-                  { key: "Ngực", label: "Ngực", children: data.nguc },
-                  { key: "Eo", label: "Eo", children: data.eo },
-                  { key: "Mông", label: "Mông", children: data.mong },
-                  { key: "Dài tay", label: "Dài tay", children: data.dai_tay },
-                  { key: "Bắp tay", label: "Bắp tay", children: data.bap_tay },
-                  {
-                    key: "Bụng tay",
-                    label: "Bụng tay",
-                    children: data.bung_tay,
-                  },
-                  {
-                    key: "Cổ tay",
-                    label: "Cổ tay",
-                    children: data.co_tay,
-                  },
-                  {
-                    key: "Đùi",
-                    label: "Đùi",
-                    children: data.dui,
-                  },
-                  {
-                    key: "Gối",
-                    label: "Gối",
-                    children: data.goi,
-                  },
-                  {
-                    key: "Bắp",
-                    label: "Bắp",
-                    children: data.bap,
-                  },
-                  { key: "Mông", label: "Mông", children: data.mong },
-                  { key: "Hạ mông", label: "Hạ mông", children: data.ha_mong },
-                  { key: "Lưng", label: "Lưng", children: data.lung },
-                  { key: "Đũng", label: "Đũng", children: data.dung },
-                  {
-                    key: "Dài quần",
-                    label: "Dài quần",
-                    children: data.dai_quan,
-                  },
-                ]
-              : [
-                  { key: "Vai", label: "Vai", children: data.vai },
-                  { key: "Cổ", label: "Cổ", children: data.co },
-                  { key: "Kheo", label: "Kheo", children: data.kheo },
-                  { key: "Ngực", label: "Ngực", children: data.nguc },
-                  { key: "Hạ ngực", label: "Hạ ngực", children: data.ha_nguc },
-                  {
-                    key: "Chân ngực",
-                    label: "Chân ngực",
-                    children: data.chan_nguc,
-                  },
-                  { key: "Eo", label: "Eo", children: data.eo },
-                  { key: "Hạ eo", label: "Hạ eo", children: data.ha_eo },
-                  { key: "Bắp tay", label: "Bắp tay", children: data.bap_tay },
-                  {
-                    key: "Bụng tay",
-                    label: "Bụng tay",
-                    children: data.bung_tay,
-                  },
-                  {
-                    key: "Cửa tay",
-                    label: "Cửa tay",
-                    children: data.cua_tay,
-                  },
-                  { key: "Mông", label: "Mông", children: data.mong },
-                  { key: "Hạ mông", label: "Hạ mông", children: data.ha_mong },
-                  {
-                    key: "Đùi",
-                    label: "Đùi",
-                    children: data.dui,
-                  },
-                  { key: "Gối", label: "Gối", children: data.goi },
-                  {
-                    key: "Bắp chân",
-                    label: "Bắp chân",
-                    children: data.bap_chan,
-                  },
-                  { key: "Lưng", label: "Lưng", children: data.lung },
-                  { key: "Đũng", label: "Đũng", children: data.dung },
-                  { key: "Hạ gối", label: "Hạ gối", children: data.ha_goi },
-                  { key: "Hạ lưng", label: "Hạ lưng", children: data.ha_lung },
-                ]
-          }
+          items={optionData.flat().map((x) => ({
+            key: x.label,
+            label: x.label,
+            children: data[x.name],
+          }))}
         />
         <Typography.Title style={{ fontSize: "18px" }} level={5}>
           Ghi chú

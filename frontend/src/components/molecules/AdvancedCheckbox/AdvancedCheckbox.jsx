@@ -16,6 +16,9 @@ const AdvancedCheckbox = ({ data, isActive, onToggle, disableSelected }) => {
         .join(" ")}
     >
       {!disableSelected && <Checkbox checked={isActive} />}
+      <div className="Customer-Description__LabelItem --Tailor">
+        Thợ: {data.tailor}
+      </div>
       <div className="Customer-Description__LabelItem">
         Tên hàng hóa: {data.merchandise}
       </div>
