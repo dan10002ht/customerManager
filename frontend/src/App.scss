@@ -80,6 +80,12 @@ main {
     outline: 3px solid #1677ff;
   }
 }
+.ant-pagination-item {
+  display: none !important;
+  &.ant-pagination-item-active {
+    display: inline-block !important;
+  }
+}
 
 // .ant-descriptions-view {
 //   border-color: #ccc !important;
