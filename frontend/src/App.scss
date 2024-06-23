@@ -72,14 +72,6 @@ main {
   }
 }
 
-.Description-Section {
-  &.--Custom-Button {
-    cursor: pointer;
-  }
-  &.--Active {
-    outline: 3px solid #1677ff;
-  }
-}
 .ant-pagination-item {
   // display: none !important;
   pointer-events: none;
