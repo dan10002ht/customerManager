@@ -251,7 +251,7 @@ const CustomerTable = () => {
       <Pagination
         pageSize={10}
         total={pagination.total}
-        pageSizeOptions={3}
+        showSizeChanger={false}
         onChange={(page) => {
           if (page === pageNum + 1) {
             handleNextPage();
