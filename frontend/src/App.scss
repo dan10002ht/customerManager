@@ -81,7 +81,8 @@ main {
   }
 }
 .ant-pagination-item {
-  display: none !important;
+  // display: none !important;
+  pointer-events: none;
   &.ant-pagination-item-active {
     display: inline-block !important;
   }
