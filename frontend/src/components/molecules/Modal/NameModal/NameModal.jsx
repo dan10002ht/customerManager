@@ -1,10 +1,9 @@
 import { Button, Checkbox, Descriptions, Flex, Modal, Typography } from "antd";
 import React, { useState } from "react";
+import "./NameModal.scss";
 import dayjs from "dayjs";
 import AdvancedCheckbox from "../../AdvancedCheckbox/AdvancedCheckbox";
 import {
-  femaleOptions,
-  maleOptions,
   splitedFemaleSectionOptions,
   splitedMaleSectionOptions,
 } from "../../../../const/options";
@@ -51,7 +50,7 @@ const NameModal = ({ name, data, customButton }) => {
         okText="In"
         width={800}
         title={
-          <div style={{ display: "flex", gap: "8px" }}>
+          <div className="Customer-Modal__Title">
             <span>Thông tin khách hàng</span>
             <span
               style={{
@@ -70,7 +69,7 @@ const NameModal = ({ name, data, customButton }) => {
         onCancel={handleCancel}
         onOk={handleOk}
       >
-        <Flex vertical gap="8px">
+        <Flex className="Customer-Modal__Wrapper" vertical gap="8px">
           <Descriptions
             bordered
             labelStyle={{
