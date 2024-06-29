@@ -156,7 +156,7 @@ const CustomerTable = () => {
       {
         title: "Ngày tạo",
         dataIndex: "createdAt",
-        render: (val) => dayjs(new Date(val)).format("hh:mm DD/MM/YYYY"),
+        render: (val) => dayjs(new Date(val)).format("HH:mm DD/MM/YYYY"),
       },
       {
         title: "Hành động",
