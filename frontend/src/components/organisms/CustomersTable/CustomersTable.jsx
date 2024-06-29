@@ -253,12 +253,9 @@ const CustomerTable = () => {
         total={pagination.total}
         pageSizeOptions={3}
         onChange={(page) => {
-          if (page === pageNum + 1) {
-            handleNextPage();
-          }
-          if (page === pageNum - 1) {
-            handlePreviousPage();
-          }
+          if (loading) return;
+          if (page === pageNum + 1) handleNextPage();
+          if (page === pageNum - 1) handlePreviousPage();
         }}
       />
     </Flex>

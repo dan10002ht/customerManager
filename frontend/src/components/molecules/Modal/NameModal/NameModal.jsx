@@ -98,7 +98,7 @@ const NameModal = ({ name, data, customButton }) => {
                 key: "name",
                 label: "Ngày tạo",
                 children: dayjs(new Date(data.createdAt)).format(
-                  "hh:mm DD/MM/YYYY"
+                  "HH:mm DD/MM/YYYY"
                 ),
               },
             ]}
